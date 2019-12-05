@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
+using BilheteriaCinema.Application.Application;
+using BilheteriaCinema.Application.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BilheteriaCinema.Controller
@@ -7,36 +9,38 @@ namespace BilheteriaCinema.Controller
     [ApiController]
     public class SessaoController : ControllerBase
     {
-        // GET: api/Sessao
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ISessaoApplication _sessaoApplication;
+
+        public SessaoController(ISessaoApplication sessaoApplication)
         {
-            return new string[] { "value1", "value2" };
+            _sessaoApplication = sessaoApplication;
         }
 
-        // GET: api/Sessao/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/Sessao
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            return "value";
+            var sessoes = await _sessaoApplication.BuscarSessoes();
+
+            return Ok(sessoes);
         }
 
         // POST: api/Sessao
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] SessaoDTO sessao)
         {
+            sessao = await _sessaoApplication.CadastrarSessao(sessao);
+
+            return Ok(sessao);
         }
 
-        // PUT: api/Sessao/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // DELETE: api/Sessao/{codigo}
+        [HttpDelete("{codigo}")]
+        public async Task<IActionResult> Delete(int codigo)
         {
-        }
+            await _sessaoApplication.CancelarSessao(codigo);
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok();
         }
     }
 }
