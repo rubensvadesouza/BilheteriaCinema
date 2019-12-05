@@ -1,33 +1,33 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BilheteriaCinema.Controllers
+namespace BilheteriaCinema.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IngressoController : ControllerBase
+    public class SessaoController : ControllerBase
     {
-        // GET: api/Ingresso
+        // GET: api/Sessao
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Ingresso/5
+        // GET: api/Sessao/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Ingresso
+        // POST: api/Sessao
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/Ingresso/5
+        // PUT: api/Sessao/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
