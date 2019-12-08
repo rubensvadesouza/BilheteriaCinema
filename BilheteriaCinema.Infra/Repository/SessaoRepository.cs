@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BilheteriaCinema.Infra.EF.Model;
 
-namespace BilheteriaCinema.Infra.EF.Repositories
+namespace BilheteriaCinema.Infra.EF.Repository
 {
     public class SessaoRepository : ISessaoRepository
     {
-        public Task<List<SessaoModel>> BuscarSessoes()
+        public Task<List<SessaoModel>> BuscarSessoes(DateTime? inicio, DateTime? fim, int? sala, int? filme)
         {
             throw new NotImplementedException();
         }

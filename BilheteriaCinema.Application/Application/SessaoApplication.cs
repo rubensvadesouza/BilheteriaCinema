@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BilheteriaCinema.Application.DTO;
 using BilheteriaCinema.Infra.EF.Model;
-using BilheteriaCinema.Infra.EF.Repositories;
+using BilheteriaCinema.Infra.EF.Repository;
 
 namespace BilheteriaCinema.Application.Application
 {
@@ -20,13 +20,13 @@ namespace BilheteriaCinema.Application.Application
             _salaRepository = salaRepository;
         }
 
-        public async Task<List<SessaoDTO>> BuscarSessoes()
+        public async Task<List<SessaoDTO>> BuscarSessoes(DateTime? inicio, DateTime? fim, int? sala, int? filme)
         {
-            var models = await _sessaoRepository.BuscarSessoes();
+            var models = await _sessaoRepository.BuscarSessoes( inicio, fim, sala, filme);
 
             var dtos = new List<SessaoDTO>();
 
-            foreach (SessaoModel model in models)
+            foreach (var model in models)
             {
                 var dto = new SessaoDTO
                 {
@@ -44,6 +44,26 @@ namespace BilheteriaCinema.Application.Application
             return dtos;
         }
 
+        public async Task<SessaoDTO> BuscarSessao(int codigo)
+        {
+            var model = await _sessaoRepository.BuscarSessao(codigo);
+
+            if (model == null)
+                return null;
+
+            var dto = new SessaoDTO()
+            {
+                Descricao = model.Descricao,
+                Codigo = model.Codigo,
+                Horario = model.Horario,
+                Valor = model.Valor,
+                CodigoSala = model.CodigoSala,
+                CodigoFilme = model.CodigoFilme
+            };
+
+            return dto;
+        }
+        
         public async Task<SessaoDTO> CadastrarSessao(SessaoDTO dto)
         {
             var filme = await _filmeRepository.BuscarFilme(dto.CodigoFilme);

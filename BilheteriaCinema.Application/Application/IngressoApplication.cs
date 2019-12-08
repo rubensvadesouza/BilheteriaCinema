@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BilheteriaCinema.Application.DTO;
 using BilheteriaCinema.Infra.EF.Model;
-using BilheteriaCinema.Infra.EF.Repositories;
+using BilheteriaCinema.Infra.EF.Repository;
 
 namespace BilheteriaCinema.Application.Application
 {
@@ -24,7 +24,7 @@ namespace BilheteriaCinema.Application.Application
 
             var dtos = new List<IngressoDTO>();
 
-            foreach (IngressoModel model in models)
+            foreach (var model in models)
             {
                 var dto = new IngressoDTO
                 {

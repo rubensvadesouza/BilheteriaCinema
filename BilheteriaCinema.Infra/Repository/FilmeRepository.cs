@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BilheteriaCinema.Infra.EF.Model;
 
-namespace BilheteriaCinema.Infra.EF.Repositories
+namespace BilheteriaCinema.Infra.EF.Repository
 {
     public class FilmeRepository : IFilmeRepository
     {

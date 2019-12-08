@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using BilheteriaCinema.Infra.EF.Model;
 
-namespace BilheteriaCinema.Infra.EF.Repositories
+namespace BilheteriaCinema.Infra.EF.Repository
 {
     public class SalaRepository : ISalaRepository
     {

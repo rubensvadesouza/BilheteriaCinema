@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using BilheteriaCinema.Application.Application;
 using BilheteriaCinema.Application.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,20 @@ namespace BilheteriaCinema.Controller
 
         // GET: api/Sessao
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] DateTime? inicio, [FromQuery]DateTime? fim, [FromQuery]int? sala, [FromQuery]int? filme)
         {
-            var sessoes = await _sessaoApplication.BuscarSessoes();
+            var sessoes = await _sessaoApplication.BuscarSessoes(inicio, fim, sala, filme);
 
             return Ok(sessoes);
+        }
+        
+        // GET: api/Sessao/{codigo}
+        [HttpGet]
+        public async Task<IActionResult> Get(int codigo)
+        {
+            var sessao = await _sessaoApplication.BuscarSessao(codigo);
+
+            return Ok(sessao);
         }
 
         // POST: api/Sessao
