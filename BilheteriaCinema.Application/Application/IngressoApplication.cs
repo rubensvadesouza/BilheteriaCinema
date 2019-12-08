@@ -18,9 +18,9 @@ namespace BilheteriaCinema.Application.Application
             _sessaoRepository = sessaoRepository;
         }
 
-        public async Task<List<IngressoDTO>> BuscarIngressos()
+        public async Task<List<IngressoDTO>> BuscarIngressos(string cpf)
         {
-            var models = await _ingressoRepository.BuscarIngressos();
+            var models = await _ingressoRepository.BuscarIngressos(cpf);
 
             var dtos = new List<IngressoDTO>();
 

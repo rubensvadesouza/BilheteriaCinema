@@ -18,9 +18,9 @@ namespace BilheteriaCinema.Controller
 
         // GET: api/Ingresso
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] string cpf)
         {
-            var ingressos = await _ingressoApplication.BuscarIngressos();
+            var ingressos = await _ingressoApplication.BuscarIngressos(cpf);
 
             return Ok(ingressos);
         }
@@ -34,7 +34,7 @@ namespace BilheteriaCinema.Controller
             return Ok(ingresso);
         }
 
-        // POST: api/Ingresso
+        // DELETE: api/Ingresso
         [HttpDelete("{codigo}")]
         public async Task<IActionResult> Delete(int codigo)
         {

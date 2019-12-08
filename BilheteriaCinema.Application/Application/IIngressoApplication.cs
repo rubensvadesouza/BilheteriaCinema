@@ -6,7 +6,7 @@ namespace BilheteriaCinema.Application.Application
 {
     public interface IIngressoApplication
     {
-        Task<List<IngressoDTO>> BuscarIngressos();
+        Task<List<IngressoDTO>> BuscarIngressos(string cpf);
         Task<IngressoDTO> ComprarIngresso(IngressoDTO ingresso);
         Task CancelarCompra(int codigo);
     }
