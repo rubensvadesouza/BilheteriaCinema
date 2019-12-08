@@ -7,7 +7,12 @@ namespace BilheteriaCinema.Infra.EF.Repository
 {
     public class IngressoRepository : IIngressoRepository
     {
-        public Task<List<IngressoModel>> BuscarIngressos(string cpf)
+        public Task<List<IngressoModel>> BuscarIngressos(DateTime? inicio, DateTime? fim, string cpf, int? sessao)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public Task<IngressoModel> BuscarIngresso(int codigo)
         {
             throw new NotImplementedException();
         }

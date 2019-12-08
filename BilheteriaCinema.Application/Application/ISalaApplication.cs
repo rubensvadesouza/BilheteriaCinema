@@ -6,7 +6,7 @@ namespace BilheteriaCinema.Application.Application
 {
     public interface ISalaApplication
     {
-        Task<List<SalaDTO>> BuscarSalas();
+        Task<List<SalaDTO>> BuscarSalas(bool? disponivel, int? min, int? max);
         Task<SalaDTO> BuscarSala(int codigo);
         Task<SalaDTO> CadastrarSala(SalaDTO sala);
     }

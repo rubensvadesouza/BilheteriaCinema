@@ -18,15 +18,15 @@ namespace BilheteriaCinema.Controller
 
         // GET: api/Sala
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(bool? disponivel, int? min, int? max)
         {
-            var salas = await _salaApplication.BuscarSalas();
+            var salas = await _salaApplication.BuscarSalas(disponivel, min, max);
 
             return Ok(salas);
         }
 
         // GET: api/Sala/{codigo}
-        [HttpGet]
+        [HttpGet("{codigo}")]
         public async Task<IActionResult> Get(int codigo)
         {
             var sala = await _salaApplication.BuscarSala(codigo);

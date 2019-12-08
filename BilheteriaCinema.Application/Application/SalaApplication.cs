@@ -15,9 +15,9 @@ namespace BilheteriaCinema.Application.Application
             _salaRepository = salaRepository;
         }
 
-        public async Task<List<SalaDTO>> BuscarSalas()
+        public async Task<List<SalaDTO>> BuscarSalas(bool? disponivel, int? min, int? max)
         {
-            var models = await _salaRepository.BuscarSalas();
+            var models = await _salaRepository.BuscarSalas(disponivel, min, max);
 
             var dtos = new List<SalaDTO>();
 

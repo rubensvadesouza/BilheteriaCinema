@@ -6,7 +6,7 @@ namespace BilheteriaCinema.Infra.EF.Repository
 {
     public interface ISalaRepository
     {
-        Task<List<SalaModel>> BuscarSalas();
+        Task<List<SalaModel>> BuscarSalas(bool? disponivel, int? min, int? max);
         Task<SalaModel> BuscarSala(int codigo);
         Task<SalaModel> CriarSala(SalaModel sala);
     }
