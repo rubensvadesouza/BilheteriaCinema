@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BilheteriaCinema.Infra.EF.Model
 {
@@ -13,5 +14,6 @@ namespace BilheteriaCinema.Infra.EF.Model
         public SalaModel Sala { get; set; }
         public int CodigoFilme { get; set; }
         public FilmeModel Filme { get; set; }
+        public List<IngressoModel> Ingressos { get; set; }
     }
 }

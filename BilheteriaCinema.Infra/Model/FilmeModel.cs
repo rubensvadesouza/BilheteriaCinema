@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BilheteriaCinema.Infra.EF.Model
 {
@@ -10,5 +11,6 @@ namespace BilheteriaCinema.Infra.EF.Model
         public TimeSpan Duracao { get; set; }
         public int FaixaEtaria { get; set; }
         public string Genero { get; set; }
+        public List<SessaoModel> Sessoes { get; set; }
     }
 }

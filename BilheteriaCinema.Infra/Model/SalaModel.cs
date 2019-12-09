@@ -1,4 +1,6 @@
-﻿namespace BilheteriaCinema.Infra.EF.Model
+﻿using System.Collections.Generic;
+
+namespace BilheteriaCinema.Infra.EF.Model
 {
     public class SalaModel
     {
@@ -7,5 +9,6 @@
         public int Codigo { get; set; }
         public int Lugares { get; set; }
         public bool Disponivel { get; set; }
+        public List<SessaoModel> Sessoes { get; set; }
     }
 }
