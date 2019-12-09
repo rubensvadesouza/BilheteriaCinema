@@ -20,7 +20,7 @@ namespace BilheteriaCinema
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("SqlConnection");
-            services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<DbBilheteriaCinemaContext>(options => options.UseSqlServer(connectionString));
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

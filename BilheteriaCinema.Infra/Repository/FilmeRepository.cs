@@ -1,20 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BilheteriaCinema.Infra.EF.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace BilheteriaCinema.Infra.EF.Repository
 {
     public class FilmeRepository : IFilmeRepository
     {
-        public Task<List<FilmeModel>> BuscarFilmes()
+        private readonly DbBilheteriaCinemaContext _dbContext;
+
+        public FilmeRepository(DbBilheteriaCinemaContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        
+        public async Task<List<FilmeModel>> BuscarFilmes()
+        {
+            return await _dbContext.Filmes.ToListAsync();
         }
 
-        public Task<FilmeModel> BuscarFilme(int codigo)
+        public async Task<FilmeModel> BuscarFilme(int codigo)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Filmes.FirstAsync(x => x.Codigo == codigo);
         }
     }
 }

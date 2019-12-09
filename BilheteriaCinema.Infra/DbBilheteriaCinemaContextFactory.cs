@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace BilheteriaCinema.Infra.EF
 {
-    public class ContextFactory : IDesignTimeDbContextFactory<Context>
+    public class DbBilheteriaCinemaContextFactory : IDesignTimeDbContextFactory<DbBilheteriaCinemaContext>
     {
-        public Context CreateDbContext(string[] args)
+        public DbBilheteriaCinemaContext CreateDbContext(string[] args)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -21,11 +21,11 @@ namespace BilheteriaCinema.Infra.EF
 
             var connectionString = configuration.GetConnectionString("SqlConnection");
             
-            var optionsBuilder = new DbContextOptionsBuilder<Context>();
+            var optionsBuilder = new DbContextOptionsBuilder<DbBilheteriaCinemaContext>();
 
             optionsBuilder.UseSqlServer(connectionString);
                 
-            return new Context(optionsBuilder.Options);
+            return new DbBilheteriaCinemaContext(optionsBuilder.Options);
         }
     }
 }

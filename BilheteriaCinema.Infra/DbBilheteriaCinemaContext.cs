@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BilheteriaCinema.Infra.EF
 {
-    public class Context : DbContext
+    public class DbBilheteriaCinemaContext : DbContext
     {
         public DbSet<FilmeModel> Filmes { get; set; }
         public DbSet<IngressoModel> Ingressos { get; set; }
         public DbSet<SalaModel> Salas { get; set; }
         public DbSet<SessaoModel> Sessoes { get; set; }
         
-        public Context(DbContextOptions options) : base(options) {}
+        public DbBilheteriaCinemaContext(DbContextOptions options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

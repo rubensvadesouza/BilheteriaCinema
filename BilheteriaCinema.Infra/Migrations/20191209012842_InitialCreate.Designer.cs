@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BilheteriaCinema.Infra.EF.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(DbBilheteriaCinemaContext))]
     [Migration("20191209012842_InitialCreate")]
     partial class InitialCreate
     {

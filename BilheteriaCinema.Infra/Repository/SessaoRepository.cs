@@ -1,30 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BilheteriaCinema.Infra.EF.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace BilheteriaCinema.Infra.EF.Repository
 {
     public class SessaoRepository : ISessaoRepository
     {
-        public Task<List<SessaoModel>> BuscarSessoes(DateTime? inicio, DateTime? fim, int? sala, int? filme)
+        private readonly DbBilheteriaCinemaContext _dbContext;
+
+        public SessaoRepository(DbBilheteriaCinemaContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        
+        public async Task<List<SessaoModel>> BuscarSessoes(DateTime? inicio, DateTime? fim, int? sala, int? filme)
+        {
+            return await _dbContext.Sessoes.Where(x => (inicio == null || x.Horario >= inicio) &&
+                                                     (fim == null || x.Horario <= fim) &&
+                                                     (sala == null || x.CodigoSala == sala) &&
+                                                     (filme == null || x.CodigoFilme == filme))
+                                                .ToListAsync();
         }
 
-        public Task<SessaoModel> BuscarSessao(int codigo)
+        public async Task<SessaoModel> BuscarSessao(int codigo)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Sessoes.FirstAsync(x => x.Codigo == codigo);
         }
 
-        public Task<SessaoModel> CriarSessao(SessaoModel sessao)
+        public async Task<SessaoModel> CriarSessao(SessaoModel sessao)
         {
-            throw new NotImplementedException();
+            sessao = _dbContext.Sessoes.Add(sessao).Entity;
+            await _dbContext.SaveChangesAsync();
+
+            return sessao;
         }
 
-        public Task DeletarSessao(int codigo)
+        public async Task DeletarSessao(int codigo)
         {
-            throw new NotImplementedException();
+            var sessao = await _dbContext.Sessoes.FirstAsync(x => x.Codigo == codigo);
+            
+            _dbContext.Remove(sessao);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
