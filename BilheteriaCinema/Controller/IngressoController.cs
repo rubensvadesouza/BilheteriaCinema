@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BilheteriaCinema.Application.Application;
 using BilheteriaCinema.Application.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BilheteriaCinema.Controller
@@ -19,6 +21,7 @@ namespace BilheteriaCinema.Controller
 
         // GET: api/Ingresso
         [HttpGet]
+        [ProducesResponseType(typeof(List<IngressoDTO>),StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromQuery] DateTime? inicio, [FromQuery] DateTime? fim, [FromQuery] string cpf, [FromQuery] int? sessao)
         {
             var ingressos = await _ingressoApplication.BuscarIngressos(inicio, fim, cpf, sessao);
@@ -28,6 +31,7 @@ namespace BilheteriaCinema.Controller
         
         // GET: api/Ingresso/{codigo}
         [HttpGet("{codigo}")]
+        [ProducesResponseType(typeof(IngressoDTO),StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(int codigo)
         {
             var ingressos = await _ingressoApplication.BuscarIngresso(codigo);
@@ -37,6 +41,7 @@ namespace BilheteriaCinema.Controller
 
         // POST: api/Ingresso
         [HttpPost]
+        [ProducesResponseType(typeof(IngressoDTO),StatusCodes.Status200OK)]
         public async Task<IActionResult> Post([FromBody] IngressoDTO ingresso)
         {
             ingresso = await _ingressoApplication.ComprarIngresso(ingresso);
@@ -46,6 +51,7 @@ namespace BilheteriaCinema.Controller
 
         // DELETE: api/Ingresso
         [HttpDelete("{codigo}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Delete(int codigo)
         {
             await _ingressoApplication.CancelarCompra(codigo);

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace BilheteriaCinema
 {
@@ -28,6 +29,11 @@ namespace BilheteriaCinema
             
             AddApplications(services);
             AddRepositories(services);
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bilheteria Cinema API", Version = "v1" });
+            });
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -40,6 +46,13 @@ namespace BilheteriaCinema
             {
                 app.UseHsts();
             }
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bilheteria Cinema API v1");
+            });
+            
+            app.UseSwagger();
 
             app.UseHttpsRedirection();
             app.UseMvc();

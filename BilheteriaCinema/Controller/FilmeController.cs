@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BilheteriaCinema.Application.Application;
+using BilheteriaCinema.Application.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BilheteriaCinema.Controller
@@ -15,8 +18,8 @@ namespace BilheteriaCinema.Controller
             _filmeApplication = filmeApplication;
         }
 
-        // GET: api/Filme
         [HttpGet]
+        [ProducesResponseType(typeof(List<FilmeDTO>),StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
             var filmes = await _filmeApplication.BuscarFilmes();
@@ -26,6 +29,7 @@ namespace BilheteriaCinema.Controller
 
         // GET: api/Filme/{codigo}
         [HttpGet("{codigo}")]
+        [ProducesResponseType(typeof(FilmeDTO),StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(int codigo)
         {
             var filme = await _filmeApplication.BuscarFilme(codigo);
