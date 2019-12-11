@@ -1,6 +1,7 @@
 ﻿using BilheteriaCinema.Application.Application;
 using BilheteriaCinema.Infra.EF;
 using BilheteriaCinema.Infra.EF.Repository;
+using BilheteriaCinema.Infra.EF.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -39,23 +40,20 @@ namespace BilheteriaCinema
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
+
             else
-            {
                 app.UseHsts();
-            }
             
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bilheteria Cinema API v1");
-            });
-            
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bilheteria Cinema API v1"); });
             app.UseSwagger();
 
             app.UseHttpsRedirection();
+
             app.UseMvc();
+
+            app.UseDatabaseMigration();
+            app.UseDatabaseSeed();
         }
 
         public void AddApplications(IServiceCollection services)
