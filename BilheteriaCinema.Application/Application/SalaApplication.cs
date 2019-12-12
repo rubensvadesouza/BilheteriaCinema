@@ -60,13 +60,12 @@ namespace BilheteriaCinema.Application.Application
             var model = new SalaModel
             {
                 Descricao = dto.Descricao,
+                Codigo = dto.Codigo,
                 Lugares = dto.Lugares,
                 Disponivel = dto.Disponivel,
             };
 
             model = await _salaRepository.CriarSala(model);
-
-            dto.Codigo = model.Codigo;
 
             return dto;
         }

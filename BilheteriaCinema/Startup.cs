@@ -52,7 +52,7 @@ namespace BilheteriaCinema
 
             app.UseMvc();
 
-            app.UseDatabaseMigration();
+            // app.UseDatabaseMigration();
             app.UseDatabaseSeed();
         }
 

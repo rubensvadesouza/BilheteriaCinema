@@ -79,6 +79,7 @@ namespace BilheteriaCinema.Application.Application
             var model = new SessaoModel
             {
                 Descricao = dto.Descricao,
+                Codigo = dto.Codigo,
                 Horario = dto.Horario,
                 Valor = dto.Valor,
                 CodigoSala = dto.CodigoSala,
