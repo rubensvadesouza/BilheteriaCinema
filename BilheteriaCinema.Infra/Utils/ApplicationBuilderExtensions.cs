@@ -12,10 +12,10 @@ namespace BilheteriaCinema.Infra.EF.Utils
     {
         public static void UseDatabaseMigration(this IApplicationBuilder app)
         {
+
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<DbBilheteriaCinemaContext>();
-
                 context.Database.Migrate();
             }
         }
