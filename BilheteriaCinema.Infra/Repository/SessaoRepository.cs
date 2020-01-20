@@ -30,14 +30,6 @@ namespace BilheteriaCinema.Infra.EF.Repository
             return await _dbContext.Sessoes.FirstAsync(x => x.Codigo == codigo);
         }
 
-        public async Task<SessaoModel> CriarSessao(SessaoModel sessao)
-        {
-            sessao = _dbContext.Sessoes.Add(sessao).Entity;
-            await _dbContext.SaveChangesAsync();
-
-            return sessao;
-        }
-
         public async Task DeletarSessao(int codigo)
         {
             var sessao = await _dbContext.Sessoes.FirstAsync(x => x.Codigo == codigo);

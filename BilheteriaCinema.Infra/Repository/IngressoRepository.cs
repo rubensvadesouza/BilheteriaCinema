@@ -15,16 +15,7 @@ namespace BilheteriaCinema.Infra.EF.Repository
         {
             _dbContext = dbContext;
         }
-        
-        public async Task<List<IngressoModel>> BuscarIngressos(DateTime? inicio, DateTime? fim, string cpf, int? sessao)
-        {
-            return await _dbContext.Ingressos.Where(x => (inicio == null || x.DataCompra >= inicio) &&
-                                                         (fim == null || x.DataCompra <= fim) &&
-                                                         (string.IsNullOrEmpty(cpf) || x.CPF == cpf) &&
-                                                         (sessao == null || x.CodigoSessao == sessao))
-                                                .ToListAsync();
-        }
-        
+       
         public async Task<IngressoModel> BuscarIngresso(int codigo)
         {
             return await _dbContext.Ingressos.FirstAsync(x => x.Codigo == codigo);

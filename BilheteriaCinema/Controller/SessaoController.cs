@@ -29,26 +29,6 @@ namespace BilheteriaCinema.Controller
             return Ok(sessoes);
         }
         
-        // GET: api/Sessao/{codigo}
-        [HttpGet("{codigo}")]
-        [ProducesResponseType(typeof(SessaoDTO),StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get(int codigo)
-        {
-            var sessao = await _sessaoApplication.BuscarSessao(codigo);
-
-            return Ok(sessao);
-        }
-
-        // POST: api/Sessao
-        [HttpPost]
-        [ProducesResponseType(typeof(SessaoDTO),StatusCodes.Status200OK)]
-        public async Task<IActionResult> Post([FromBody] SessaoDTO sessao)
-        {
-            sessao = await _sessaoApplication.CadastrarSessao(sessao);
-
-            return Ok(sessao);
-        }
-
         // DELETE: api/Sessao/{codigo}
         [HttpDelete("{codigo}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

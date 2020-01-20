@@ -18,16 +18,6 @@ namespace BilheteriaCinema.Controller
         {
             _ingressoApplication = ingressoApplication;
         }
-
-        // GET: api/Ingresso
-        [HttpGet]
-        [ProducesResponseType(typeof(List<IngressoDTO>),StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get([FromQuery] DateTime? inicio, [FromQuery] DateTime? fim, [FromQuery] string cpf, [FromQuery] int? sessao)
-        {
-            var ingressos = await _ingressoApplication.BuscarIngressos(inicio, fim, cpf, sessao);
-
-            return Ok(ingressos);
-        }
         
         // GET: api/Ingresso/{codigo}
         [HttpGet("{codigo}")]

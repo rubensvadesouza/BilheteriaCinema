@@ -41,57 +41,11 @@ namespace BilheteriaCinema.Application.Application
                 dtos.Add(dto);
             }
 
+            if (dtos.Count == 0)
+                throw new Exception("Erro");
+
             return dtos;
-        }
-
-        public async Task<SessaoDTO> BuscarSessao(int codigo)
-        {
-            var model = await _sessaoRepository.BuscarSessao(codigo);
-
-            if (model == null)
-                return null;
-
-            var dto = new SessaoDTO()
-            {
-                Descricao = model.Descricao,
-                Codigo = model.Codigo,
-                Horario = model.Horario,
-                Valor = model.Valor,
-                CodigoSala = model.CodigoSala,
-                CodigoFilme = model.CodigoFilme
-            };
-
-            return dto;
-        }
-        
-        public async Task<SessaoDTO> CadastrarSessao(SessaoDTO dto)
-        {
-            var filme = await _filmeRepository.BuscarFilme(dto.CodigoFilme);
-
-            if (filme == null)
-                throw new Exception();
-
-            var sala = await _salaRepository.BuscarSala(dto.CodigoSala);
-
-            if (sala == null)
-                throw new Exception();
-
-            var model = new SessaoModel
-            {
-                Descricao = dto.Descricao,
-                Codigo = dto.Codigo,
-                Horario = dto.Horario,
-                Valor = dto.Valor,
-                CodigoSala = dto.CodigoSala,
-                CodigoFilme = dto.CodigoFilme,
-            };
-
-            model = await _sessaoRepository.CriarSessao(model);
-
-            dto.Codigo = model.Codigo;
-
-            return dto;
-        }
+        }    
 
         public async Task CancelarSessao(int codigo)
         {
